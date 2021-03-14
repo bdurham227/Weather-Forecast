@@ -28,7 +28,7 @@ var formSubmitHandler = function (event) {
   if (city) {
     getWeatherReport(city);
 
-    recentContainerEl.textContent = '';
+    searchContainerEl.textContent = '';
     searchInputEl.value = '';
   } else {
     alert('Please enter a City Name');
@@ -51,7 +51,8 @@ var buttonClickHandler = function (event) {
 
 
 var getWeatherReport = function (city) {
-    var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=166a433c57516f51dfab1f7edaed8413`;
+    //var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`;
+    var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`;
   
     fetch(apiUrl)
       .then(function (response) {
@@ -64,34 +65,39 @@ var getWeatherReport = function (city) {
             oneCallAPI(data.coord.lat, data.coord.lon)
           });
         } else {
-          alert('Error: ' + response.statusText);
+          alert('bigbadError: ' + response.statusText);
         }
       })
       .catch(function (error) {
         
       });
+      
   };
   
 
-  getWeatherReport();
+  getWeatherReport("tampa");
+  //getWeatherReport();
+  
 
 
 var getCurrentWeather = function (city) {
-  var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=166a433c57516f51dfab1f7edaed8413`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`;
 fetch(apiUrl)
 .then(function (response) {
   if (response.ok) {
     response.json().then(function (data) {
+      console.log(data);
       displayCurrentWeather(data, current);
     });
   } else {
-    alert("Error: " + response.statusText);
+    alert("BigError: " + response.statusText);
   }
 })
 .catch(function (error) {
   alert('unable to connect to OpenWeatherAPI');
 });
 }
+
 
 var displayCurrentWeather = function (city, current) {
 
@@ -118,7 +124,8 @@ var displayCurrentWeather = function (city, current) {
 
 
 function oneCallAPI(lat, lon){
-    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=166a433c57516f51dfab1f7edaed8413`
+    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
+    //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
 
     fetch(apiUrl)
     .then(function (response) {
