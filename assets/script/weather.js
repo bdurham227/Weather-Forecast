@@ -1,9 +1,15 @@
 var cities = [];
 
 var cityFormEl = $('#city-search-form');
-let cityInputEl = $('#city').val();
-console.log($('#city').val())
-let submitBtn = $('#button');
+//let cityInputEl = $('#city').val();
+//console.log($('#city').val())
+let cityInputEl = $('input[name="search-input"]');
+//let cityInputEl = document.querySelector('#city');
+//console.log(cityInputEl.value);
+let city = cityInputEl.val();
+//let city = cityInputEl.value;
+
+//let submitBtn = $('#button');
 //let cityInputEl = document.getElementById("city");
 var pastSearchEl = $('#past-search-buttons');
 var previousCityEl = $('#previous-city');
@@ -12,6 +18,8 @@ var fiveDayForecastEl = $('#five-day-forecast');
 var currentCityWeather = $('#current-forecast');
 var forecastEl = $('#forecast');
 var fiveDayContainer = $('#fiveday-container');
+
+//let previousSearch = localStorage.getItem("city");
 
 /*var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -31,7 +39,7 @@ var fiveDayContainer = $('#fiveday-container');
 
 const formSubmitHandler = (event) => {
   event.preventDefault();
-
+  //let city = cityInputEl.value;
   let city = cityInputEl.val().trim();
 
   if(city) {
@@ -42,37 +50,21 @@ const formSubmitHandler = (event) => {
   } else {
     alert("please enter a city name");
   }
+  //saveSearch();
   
 }
 
+//const buttonClickHandler = (event) => {
+ // let previousSearch = event.target;
+//  console.log(previousSearch);
+//}
 
-/*var saveSearch = function () {
-  localStorage.setItem("cities", JSON.stringify(cities));
 
+
+
+const saveSearch = () => {
+  localStorage.setItem("city", JSON.stringify(city));
 }
-console.log("pre function")
-var getCityWeather = function (city) {
-  var apiKey = '23dd7d8d5c92cd7c1c479c510aaf11d3';
-  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}"`;
-
-  fetch(apiUrl)
-  .then(function (response){
-    console.log("inside function");
-    response.json().then(function (data) {
-      console.log(data);
-      displayCurrentWeather(data, city);
-    });
-  });
-};
-console.log("outside function");
-
-var displayCurrentWeather = function (weather, searchCity) {
-  currentWeatherContainer.text("");
-  currentCityWeather.text(searchCity);
-}*/
-
-
-
 
 
 
@@ -107,9 +99,9 @@ const getCityWeather = (city) => {
     console.log($('#city').val());
   })
 }
-console.log($('#city').val());
+//console.log($('#city').val());
 getCityWeather(city);
-console.log($('#city').val());
+//console.log($('#city').val());
 
 const oneCallAPI = (lat,lon) => {
   var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
@@ -122,6 +114,27 @@ const oneCallAPI = (lat,lon) => {
     console.log(data);
   })
 }
+
+/*var displayCurrentWeather = function (weather, searchCity) {
+  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+  fetch(apiUrl)
+  method: "POST"
+
+  
+  currentWeatherContainer.text("");
+  currentCityWeather.text(searchCity.main);
+  currentWeatherContainer.append(currentCityWeather);
+}*/
+
+
+
+
+
+
+
 
 
 
@@ -149,5 +162,5 @@ const oneCallAPI = (lat,lon) => {
 
 
 
-submitBtn.on("submit", formSubmitHandler);
+cityFormEl.on("submit", formSubmitHandler);
 
