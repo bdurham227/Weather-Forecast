@@ -20,61 +20,75 @@
         <h1 class="display-3 text-light">Weather Dashboard</h1>
     </header>
     
-    <main class="flex-row justify-space-between">
-        <div class="col-12 col-md-4">
-            <div class="card">
-                <h3 class="card-header text-uppercase">Search for a City</h3>
-                <form id="weather-form" class="card-body">
+    
+
+
+
+<main class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-4 p-2 search-column">
+                <form id="city-search-form" class="border p-2">
+                    <h3 class="card-header text-uppercase p-1 mb-2">Search for a City</h3>
                     <label class="form-label" for="city-name">City: </label>
-                    <input name="search-input" id="search-input" type="text" autofocus='true' class="form-input" />
+                    <input id="city" name="search-input" type="text" autofocus='true' class="form-input" />
                     <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
                 </form>
-            
+                <div class="past-search-border" id="past-search-buttons"></div>
             </div>
-            <div class="col-12 col-md-4 p-3">
-                <h4 class="subtitle"><span id="recent-text"></span>Recent</h4>
+
+            <!--<div class="col-12 col-md-4 p-3">
+                <h4 class="subtitle"><span id="recent-search-city"></span>Recent</h4>
                 <div id="recent-container" class="list-group"></div>
             
+                    </div>-->
+            <div class="col-12 col-md-12">
+                <div class="row border selected-city" id="current-forecast">
+                    <div class="col-12">
+                        <h2 id="previous-city">previous</h2>
+                        <div id="current-weather-container" class="list-group"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-            
-            
-
-
-
-
-
-
-
+        <div class="row border" id="five-day-forecast">
+            <h2 class="col-12" id="forecast"></h2>
+            <div class="d-flex" id="fiveday-container"></div>
         </div>
+        
     </main>
+
+    <!--<main class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-9 p-3 search-column">
+                <form class="border p-2" id="city-search-column">
+                    <h4>Search for a City</h4>
+                    <input id="city" type="text" autofocus="true" class="form-input">
+                    <button class='btn btn-primary' type="submit"><i class='fas fa-search'></button>
+                </form>
+                <div class="past-search-border" id="past-search-buttons"></div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="row border selected-city" id="current-forecast">
+                    <div class="col-12">
+                        <h2 id="previous-city"></h2>
+                        <div id="current-weather-container" class="list-group"></div>
+                    </div>
+                </div>
+                <div class="row border" id="five-day-forecast">
+                    <h2 class="col-12" id="forecast"></h2>
+                    <div class="d-flex" id="fiveday-container"></div>
+                </div>
+            </div>
+        </div>
+    </main>-->
     
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./assets/script/weather.js"></script>
 </body>
 </html>

@@ -1,108 +1,147 @@
-var searchFormEl = document.querySelector('#weather-form');
-var searchInputEl = document.querySelector("#search-input");
-var recentContainerEl = document.querySelector('#recent-container');
-var recentSearchCity = document.querySelector("#recent-search-city");
+var cities = [];
 
-/*function handleSearchFormSubmit(event) {
+var cityFormEl = $('#city-search-form');
+let cityInputEl = $('#city').val();
+console.log($('#city').val())
+let submitBtn = $('#button');
+//let cityInputEl = document.getElementById("city");
+var pastSearchEl = $('#past-search-buttons');
+var previousCityEl = $('#previous-city');
+var currentWeatherContainer = $('current-weather-container');
+var fiveDayForecastEl = $('#five-day-forecast');
+var currentCityWeather = $('#current-forecast');
+var forecastEl = $('#forecast');
+var fiveDayContainer = $('#fiveday-container');
+
+/*var formSubmitHandler = function (event) {
+  event.preventDefault();
+  var city = cityInputEl.val().trim();
+  if(city) {
+    getCityWeather(city);
+    get5Day(city);
+    cities.unshift({city});
+    cityInputEl.val("");
+  } else {
+    alert("please enter a city");
+  }
+  saveSearch();
+  pastSearch();
+
+}*/
+
+const formSubmitHandler = (event) => {
   event.preventDefault();
 
-var searchInputVal = document.querySelector('#search-input');
+  let city = cityInputEl.val().trim();
 
-
-if (!searchInputVal) {
-  alert("Please enter a city in America to search for!");
-  return;
-}
-
-var queryString = './weather-results.html?q=' + searchInputVal;
-
-location.assign(queryString);
-}
-searchFormEl.addEventListener('submit', handleSearchFormSubmit);*/
-
-var formSubmitHandler = function (event) {
-  event.preventDefualt();
-
-  var city = searchInputEl.value.trim();
-
-  if (city) {
-    getWeatherReport(city);
-
-    searchContainerEl.textContent = '';
-    searchInputEl.value = '';
+  if(city) {
+    getCityWeather(city);
+    get5DayCityForecast(city);
+    cities.unshift({city});
+    cityInputEl.val("");
   } else {
-    alert('Please enter a City Name');
+    alert("please enter a city name");
   }
+  
 }
 
-var buttonClickHandler = function (event) {
-  var element = event.target;
-  console.log(element);
 
-  if (element) {
-    getWeatherReport(element);
+/*var saveSearch = function () {
+  localStorage.setItem("cities", JSON.stringify(cities));
 
-    recentContainerEl.textContent = '';
-  }
-};
+}
+console.log("pre function")
+var getCityWeather = function (city) {
+  var apiKey = '23dd7d8d5c92cd7c1c479c510aaf11d3';
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}"`;
 
-
-
-
-
-var getWeatherReport = function (city) {
-    //var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`;
-    var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`;
-  
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            //data is the data from the repos and username
-            console.log(data)
-            console.log(data.coord.lat);
-            console.log(data.coord.lon)
-            oneCallAPI(data.coord.lat, data.coord.lon)
-          });
-        } else {
-          alert('bigbadError: ' + response.statusText);
-        }
-      })
-      .catch(function (error) {
-        
-      });
-      
-  };
-  
-
-  getWeatherReport("tampa");
-  //getWeatherReport();
-  
-
-
-var getCurrentWeather = function (city) {
-  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`;
-fetch(apiUrl)
-.then(function (response) {
-  if (response.ok) {
+  fetch(apiUrl)
+  .then(function (response){
+    console.log("inside function");
     response.json().then(function (data) {
       console.log(data);
-      displayCurrentWeather(data, current);
+      displayCurrentWeather(data, city);
     });
-  } else {
-    alert("BigError: " + response.statusText);
-  }
+  });
+};
+console.log("outside function");
+
+var displayCurrentWeather = function (weather, searchCity) {
+  currentWeatherContainer.text("");
+  currentCityWeather.text(searchCity);
+}*/
+
+
+
+
+
+
+/*function getCityWeather (city) {
+  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+//console.log("function-start");
+
+
+fetch(apiUrl)
+.then(response => response.json())
+.then(data => {
+  
+  console.log(data);
+  console.log(city);
 })
-.catch(function (error) {
-  alert('unable to connect to OpenWeatherAPI');
-});
+}
+getCityWeather(city);*/
+
+
+const getCityWeather = (city) => {
+  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+  fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    console.log(city);
+    console.log($('#city').val());
+  })
+}
+console.log($('#city').val());
+getCityWeather(city);
+console.log($('#city').val());
+
+const oneCallAPI = (lat,lon) => {
+  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
+
+  fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
 }
 
 
-var displayCurrentWeather = function (city, current) {
 
 
+
+/*function oneCallAPI(lat, lon){
+  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  var apiUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
+
+  fetch(apiUrl)
+  .then(function (response) {
+      if (response.ok) {
+          response.json().then(function (data){
+              console.log(data);
+          })
+      }
+  })
 }
+*/
 
 
 
@@ -110,32 +149,5 @@ var displayCurrentWeather = function (city, current) {
 
 
 
+submitBtn.on("submit", formSubmitHandler);
 
-
-
-
-
-
-
-
-
-
-
-
-
-function oneCallAPI(lat, lon){
-    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
-    //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
-
-    fetch(apiUrl)
-    .then(function (response) {
-        if (response.ok) {
-            response.json().then(function (data){
-                console.log(data);
-            })
-        }
-    })
-
-}
-
-searchFormEl.addEventListener('submit', formSubmitHandler);
