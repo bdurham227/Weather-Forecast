@@ -148,3 +148,18 @@ function oneCallAPI(lat, lon){
 }
 
 searchFormEl.addEventListener('submit', formSubmitHandler);*/
+
+/*function oneCallAPI(lat, lon){
+  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  var apiUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+  //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
+
+  fetch(apiUrl)
+  .then(function (response) {
+      if (response.ok) {
+          response.json().then(function (data){
+              console.log(data);
+          })
+      }
+  })
+}
