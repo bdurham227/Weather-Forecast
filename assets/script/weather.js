@@ -209,32 +209,59 @@ let dayOneTempDiv = $('<div>');
 dayOneTempDiv.text(dayOneTemp);
 fiveDayContainer.append("Temperature: " + dayOneTemp + "°F" );
 //add humidity
+//console.log(fiveDays[0].humidity);
+let dayOneHumidity = Math.round(fiveDays[0].humidity);
+let dayOneHumidityDiv = $('<div>');
+dayOneHumidityDiv.text(dayOneHumidity);
+fiveDayContainer.append("Humidity: " + dayOneHumidity + "%");
+
 
 //======================DAY TWO=================================
 let dayTwoTemp = Math.round(fiveDays[1].temp.day);
 let dayTwoTempDiv = $('<div>');
 dayTwoTempDiv.text(dayTwoTemp);
 fiveDayContainer.append("Temperature: " + dayTwoTemp + "°F" );
+//add humidity
+let dayTwoHumidity = Math.round(fiveDays[1].humidity);
+let dayTwoHumidityDiv = $('<div>');
+dayTwoHumidityDiv.text(dayTwoHumidity);
+fiveDayContainer.append("Humidity: " + dayTwoHumidity + "%");
+//============================================
 
 //==================DAY THREE====================
 let dayThreeTemp = Math.round(fiveDays[2].temp.day);
 let dayThreeTempDiv = $('<div>');
 dayThreeTempDiv.text(dayThreeTemp);
 fiveDayContainer.append("Temperature: " + dayThreeTemp + "°F" );
+//add humidity
+let dayThreeHumidity = Math.round(fiveDays[2].humidity);
+let dayThreeHumidityDiv = $('<div>');
+dayThreeHumidityDiv.text(dayThreeHumidity);
+fiveDayContainer.append("Humidity: " + dayThreeHumidity + "%");
+//=====================================
 
 //===================DAY FOUR================
-
 let dayFourTemp = Math.round(fiveDays[3].temp.day);
 let dayFourTempDiv = $('<div>');
 dayFourTempDiv.text(dayFourTemp);
 fiveDayContainer.append("Temperature: " + dayFourTemp + "°F" );
+//add humidity
+let dayFourHumidity = Math.round(fiveDays[3].humidity);
+let dayFourHumidityDiv = $('<div>');
+dayFourHumidityDiv.text(dayFourHumidity);
+fiveDayContainer.append("Humidity: " + dayFourHumidity + "%");
 
 //======================DAY FIVE=====================
-
 let dayFiveTemp = Math.round(fiveDays[4].temp.day);
 let dayFiveTempDiv = $('<div>');
 dayFiveTempDiv.text(dayFiveTemp);
 fiveDayContainer.append("Temperature: " + dayFiveTemp + "°F" );
+//add humidity
+let dayFiveHumidity = Math.round(fiveDays[4].humidity);
+let dayFiveHumidityDiv = $('<div>');
+dayFiveHumidityDiv.text(dayFiveHumidity);
+fiveDayContainer.append("Humidity: " + dayFiveHumidity + "%");
+
 
 
 
@@ -247,8 +274,8 @@ fiveDayContainer.append("Temperature: " + dayFiveTemp + "°F" );
 //console.log(dayOneTemp);
 
 
-let dayOneHumidity = fiveDays[0].humidity;
-let dayOneUvi = fiveDays[0].uvi;
+//let dayOneHumidity = fiveDays[0].humidity;
+//let dayOneUvi = fiveDays[0].uvi;
 
 //fiveDays.forEach(day => {
   //console.log(day);
