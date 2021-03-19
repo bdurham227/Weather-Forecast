@@ -91,7 +91,7 @@ fetch(apiUrl)
 }
 getCityWeather(city);*/
 
-
+//=====================function that handles and fetches API CALL then calls displayCurrentWeather function==========================
 const getCityWeather = (city) => {
   let apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
   //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
@@ -140,86 +140,35 @@ const getCityWeather = (city) => {
   currentWeatherContainer.append(currentCityWeather);
 }*/
 
+
+//============================Handles getcityWeather API data to display on html========================
 const displayCurrentWeather = (data, searchCity) => {
-  //var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
-  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+ 
+
+//=======WEATHER ICON=======
   let iconCode = data.weather[0].icon
     let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     weatherIcon.attr("src", iconUrl);
-    //weatherIcon.attr('alt', );
 let cityTemp = Math.round(data.main.temp);
+//=================================================================
+
 //console.log(data.weather[0].icon);
 //console.log(fahrenheit);
 //let tempInF = Math.floor(data.main.temp * (9/5) + 32);
 
-//city name displaying on HTML
+//======================city name displaying on HTML====================================
 currentCityEl.text(searchCity + " " + rightNow);
-//append current text
 temperature.text("Temperature " + cityTemp + "°F");
-//append current temperature to city
 currentWeatherContainer.append(temperature);
-
-
 humidity.text("Humidity: " + data.main.humidity + "%");
 currentWeatherContainer.append(humidity);
-
 windSpeed.text("Winds: " + data.wind.speed + " mph")
 currentWeatherContainer.append(windSpeed);
-
-//let weatherIcon = $('<img>');
-//weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${searchCity.weather.icon}@2x.png`);
-//currentCityEl.append(weatherIcon);
-
-//TO DO ADD UV INDEX, WEATHER ICON AND ADD CLASS
-
-
-
-//currentWeatherContainer.append(currentCityWeather);
-//currentWeatherContainer.append(temperature);
-
-
-
-
-//let cityInfo = $('<div>');
-//let weatherIcon = $('<div>');
-//weatherIcon.text(data.weather[0].icon);
-//cityInfo.append(weatherIcon);
-
-//cityInfo.text("Temperature " + cityTemp);
-//currentCityWeather.append(cityInfo);
-
-
-
-//for (var i = 0; i < 4;i++) {
-//let cityInfo = $('<ul>');
-//let cityInfoLi1 = $('<li>');
-//let cityInfoLi2 = $('<li>')
-//cityInfoLi1.text("Temperature " + cityTemp);
-//cityInfo.append(cityInfoLi1);
-//}
 }
 
 
 
-//currentCityWeather.append(cityInfo);
-
-
-/*for (var i = 0; i < data.length; i++) {
-  //currentCityWeather.text(searchCity)
-  let cityTitle = $('<h3>');
-  cityTitle.text(data[i].main.temp);
-  //console.log(data.main);
-  //console.log(cityTitle);
-  currentCityWeather.append(cityTitle);
-  body.append(currentCityWeather);
-}*/
-
-
-
-
-
-
+//================================API call to ONECALLAPI to get daily forecast then run display5day function to handle that data===================
 const get5DayCityForecast = (lat, lon) => {
 
   var apiKey = "13a7d99fd01bbf81add0b89d186f1c5f";
@@ -240,7 +189,7 @@ fetch(oneUrl)
 
 
 }
-
+//=============================Displaying 5 Forecast====================================
 const display5FiveDay = (data) => {
   //console.log(data.list[0]);
   //displayCurrentWeather(data, city);
@@ -257,6 +206,14 @@ uvIndex.text("Uv-Index: " + currentUv);*/
 let dayOneT = fiveDays[0].temp;
 let dayOneH = fiveDays[0].humidity;
 let dayOneUvi = fiveDays[0].uvi;
+
+fiveDays.forEach(day => {
+  //console.log(day);
+  console.log(day);
+  day += fiveDays.temp;
+ //console.log(day.temp);
+})
+
 //console.log(dayOneT);
 //console.log(dayOneH);
 //console.log(dayOneUvi);
@@ -283,44 +240,7 @@ if (currentUv <= 2){
 
 
 
-
-
-
-
-
-
-
-fiveDays.forEach(day => {
-  //console.log(day);
-  console.log(day);
-  day += fiveDays.temp;
- //console.log(day.temp);
-})
-
-
-
-
-
-
-
-
-
-
-//fiveDay.forEach(day => day += data.list.main.temp)
-//console.log(day);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -328,3 +248,36 @@ fiveDays.forEach(day => {
 
 cityFormEl.on("submit", formSubmitHandler);
 
+//==========================================================TEST  CODE=================================
+
+//let cityInfo = $('<div>');
+//let weatherIcon = $('<div>');
+//weatherIcon.text(data.weather[0].icon);
+//cityInfo.append(weatherIcon);
+
+//cityInfo.text("Temperature " + cityTemp);
+//currentCityWeather.append(cityInfo);
+
+
+
+//for (var i = 0; i < 4;i++) {
+//let cityInfo = $('<ul>');
+//let cityInfoLi1 = $('<li>');
+//let cityInfoLi2 = $('<li>')
+//cityInfoLi1.text("Temperature " + cityTemp);
+//cityInfo.append(cityInfoLi1);
+//}
+
+//================================================TEST CODE================================================
+//currentCityWeather.append(cityInfo);
+/*for (var i = 0; i < data.length; i++) {
+  //currentCityWeather.text(searchCity)
+  let cityTitle = $('<h3>');
+  cityTitle.text(data[i].main.temp);
+  //console.log(data.main);
+  //console.log(cityTitle);
+  currentCityWeather.append(cityTitle);
+  body.append(currentCityWeather);
+}*/
+
+//===============================================END OF TEST CODE====================================
