@@ -18,6 +18,7 @@ var fiveDayForecastEl = $('#five-day-forecast');
 var currentCityWeather = $('#current-forecast');
 var forecastEl = $('#forecast');
 var fiveDayContainer = $('#fiveday-container');
+let rightNow = moment().subtract(10, 'days').calendar();
 
 //let previousSearch = localStorage.getItem("city");
 
@@ -44,7 +45,7 @@ const formSubmitHandler = (event) => {
 
   if(city) {
     getCityWeather(city);
-    get5DayCityForecast(city);
+    //get5DayCityForecast(city);
     cities.unshift({city});
     cityInputEl.val("");
   } else {
@@ -87,20 +88,21 @@ getCityWeather(city);*/
 
 
 const getCityWeather = (city) => {
-  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  let apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
   //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
 
   fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
     console.log(data);
+    displayCurrentWeather(data, city);
     console.log(city);
-    console.log($('#city').val());
+   // console.log($('#city').val());
   })
 }
 //console.log($('#city').val());
-getCityWeather(city);
+//getCityWeather(city);
 //console.log($('#city').val());
 
 const oneCallAPI = (lat,lon) => {
@@ -112,6 +114,8 @@ const oneCallAPI = (lat,lon) => {
   .then(response => response.json())
   .then(data => {
     console.log(data);
+    
+    //console.log(displayCurrentWeather);
   })
 }
 
@@ -129,8 +133,53 @@ const oneCallAPI = (lat,lon) => {
   currentWeatherContainer.append(currentCityWeather);
 }*/
 
+const displayCurrentWeather = (data, searchCity) => {
+  //var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
+  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+let cityTemp = Math.round(data.main.temp);
+console.log(data.weather[0].icon);
+//console.log(fahrenheit);
+//let tempInF = Math.floor(data.main.temp * (9/5) + 32);
+currentCityWeather.text(searchCity + " " + rightNow);
+let cityInfo = $('<div>');
+let weatherIcon = $('<div>');
+weatherIcon.text(data.weather[0].icon);
+cityInfo.append(weatherIcon);
+
+cityInfo.text("Temperature " + cityTemp);
+currentCityWeather.append(cityInfo);
 
 
+
+
+//let cityInfo = $('<ul>');
+//for (var i = 0; i < 4;i++) {
+//let cityInfoLi1 = $('<li>');
+//let cityInfoLi2 = $('<li>')
+//cityInfoLi.text("Temperature " + cityTemp);
+//cityInfo.append(cityInfoLi1);
+}
+
+
+
+//currentCityWeather.append(cityInfo);
+
+
+/*for (var i = 0; i < data.length; i++) {
+  //currentCityWeather.text(searchCity)
+  let cityTitle = $('<h3>');
+  cityTitle.text(data[i].main.temp);
+  //console.log(data.main);
+  //console.log(cityTitle);
+  currentCityWeather.append(cityTitle);
+  body.append(currentCityWeather);
+}*/
+
+
+
+
+//displayCurrentWeather();
 
 
 
