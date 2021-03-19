@@ -195,24 +195,79 @@ const display5FiveDay = (data) => {
   //displayCurrentWeather(data, city);
   let fiveDays = data.daily.slice(0,5);
   //console.log(data);
-//console.log(fiveDays);
+console.log(fiveDays);
 //console.log(data);
 //uvIndex.text(data.current.uvi);
 /*console.log(data.current.uvi);
 let currentUv = Math.round(data.current.uvi);
 uvIndex.text("Uv-Index: " + currentUv);*/
 
+//=================DAY ONE===================
 
-let dayOneT = fiveDays[0].temp;
-let dayOneH = fiveDays[0].humidity;
+let dayOneTemp = Math.round(fiveDays[0].temp.day);
+let dayOneTempDiv = $('<div>');
+dayOneTempDiv.text(dayOneTemp);
+fiveDayContainer.append("Temperature: " + dayOneTemp + "°F" );
+//add humidity
+
+//======================DAY TWO=================================
+let dayTwoTemp = Math.round(fiveDays[1].temp.day);
+let dayTwoTempDiv = $('<div>');
+dayTwoTempDiv.text(dayTwoTemp);
+fiveDayContainer.append("Temperature: " + dayTwoTemp + "°F" );
+
+//==================DAY THREE====================
+let dayThreeTemp = Math.round(fiveDays[2].temp.day);
+let dayThreeTempDiv = $('<div>');
+dayThreeTempDiv.text(dayThreeTemp);
+fiveDayContainer.append("Temperature: " + dayThreeTemp + "°F" );
+
+//===================DAY FOUR================
+
+let dayFourTemp = Math.round(fiveDays[3].temp.day);
+let dayFourTempDiv = $('<div>');
+dayFourTempDiv.text(dayFourTemp);
+fiveDayContainer.append("Temperature: " + dayFourTemp + "°F" );
+
+//======================DAY FIVE=====================
+
+let dayFiveTemp = Math.round(fiveDays[4].temp.day);
+let dayFiveTempDiv = $('<div>');
+dayFiveTempDiv.text(dayFiveTemp);
+fiveDayContainer.append("Temperature: " + dayFiveTemp + "°F" );
+
+
+
+
+
+
+
+
+
+//console.log(dayOneTemp);
+
+
+let dayOneHumidity = fiveDays[0].humidity;
 let dayOneUvi = fiveDays[0].uvi;
 
-fiveDays.forEach(day => {
+//fiveDays.forEach(day => {
   //console.log(day);
-  console.log(day);
-  day += fiveDays.temp;
- //console.log(day.temp);
-})
+  //console.log(day.temp.day);
+  //let forecastedTemperature = Math.round(day.temp.day);
+  //let newDayArray = [];
+  //newDayArray.push(forecastedTemperature);
+  //console.log(newDayArray);
+  //let newDay = $('<div>');
+ // newDay.text(forecastedTemperature);
+  //fiveDayContainer.append(newDay)
+  
+  //day += temp;
+ //console.log(day.daily.temp);
+//})
+//let forecastedTemperature = Math.round(fiveDays.temp.day);
+//let newDayArray = [];
+//newDayArray.push(forecastedTemperature);
+//console.log(newDayArray);
 
 //console.log(dayOneT);
 //console.log(dayOneH);
