@@ -162,4 +162,4 @@ searchFormEl.addEventListener('submit', formSubmitHandler);*/
           })
       }
   })
-}
+*/

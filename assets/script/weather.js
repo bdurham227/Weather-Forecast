@@ -23,6 +23,7 @@ let temperature = $('#temperature');
 let humidity = $('#humidity');
 let windSpeed = $('#wind');
 let uvIndex = $('#uv-index');
+let weatherIcon = $('#icon');
 
 //let previousSearch = localStorage.getItem("city");
 
@@ -49,7 +50,7 @@ const formSubmitHandler = (event) => {
 
   if(city) {
     getCityWeather(city);
-    get5DayCityForecast(city);
+    //get5DayCityForecast(city);
     cities.unshift({city});
     cityInputEl.val("");
   } else {
@@ -101,6 +102,7 @@ const getCityWeather = (city) => {
   .then(data => {
     console.log(data);
     displayCurrentWeather(data, city);
+    get5DayCityForecast(data.coord.lat, data.coord.lon);
     console.log(city);
    // console.log($('#city').val());
   })
@@ -109,7 +111,7 @@ const getCityWeather = (city) => {
 //getCityWeather(city);
 //console.log($('#city').val());
 
-const oneCallAPI = (lat,lon) => {
+/*const oneCallAPI = (lat,lon) => {
   var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
   var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
   //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
@@ -118,10 +120,11 @@ const oneCallAPI = (lat,lon) => {
   .then(response => response.json())
   .then(data => {
     console.log(data);
+    console.log(data.coord.lat, data.coord.lon);
     
     //console.log(displayCurrentWeather);
   })
-}
+}*/
 
 /*var displayCurrentWeather = function (weather, searchCity) {
   var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
@@ -141,6 +144,10 @@ const displayCurrentWeather = (data, searchCity) => {
   //var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
   //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
   //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+  let iconCode = data.weather[0].icon
+    let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    weatherIcon.attr("src", iconUrl);
+    //weatherIcon.attr('alt', );
 let cityTemp = Math.round(data.main.temp);
 //console.log(data.weather[0].icon);
 //console.log(fahrenheit);
@@ -160,9 +167,9 @@ currentWeatherContainer.append(humidity);
 windSpeed.text("Winds: " + data.wind.speed + " mph")
 currentWeatherContainer.append(windSpeed);
 
-let weatherIcon = $('<img>');
+//let weatherIcon = $('<img>');
 //weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${searchCity.weather.icon}@2x.png`);
-currentCityEl.append(weatherIcon);
+//currentCityEl.append(weatherIcon);
 
 //TO DO ADD UV INDEX, WEATHER ICON AND ADD CLASS
 
@@ -213,23 +220,83 @@ currentCityEl.append(weatherIcon);
 
 
 
-const get5DayCityForecast = (city) => {
+const get5DayCityForecast = (lat, lon) => {
+
   var apiKey = "13a7d99fd01bbf81add0b89d186f1c5f";
-  var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+  var oneUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`
 
 
-fetch(apiUrl)
+fetch(oneUrl)
 .then(response => response.json())
 .then(data => {
   console.log(data);
-  displayCurrentWeather(data, city);
+  //console.log(lat, lon);
+  //console.log(data.coord.lat, data.coord.lon)
+  display5FiveDay(data);
+ 
+
+
+})
+
+
+}
+
+const display5FiveDay = (data) => {
+  //console.log(data.list[0]);
+  //displayCurrentWeather(data, city);
+  let fiveDays = data.daily.slice(0,5);
+  console.log(data);
+console.log(fiveDays);
+//console.log(data);
+//uvIndex.text(data.current.uvi);
+console.log(data.current.uvi);
+let currentUv = Math.round(data.current.uvi);
+uvIndex.text("Uv-Index: " + currentUv);
+
+
+let dayOneT = fiveDays[0].temp;
+let dayOneH = fiveDays[0].humidity;
+let dayOneUvi = fiveDays[0].uvi;
+console.log(dayOneT);
+console.log(dayOneH);
+//console.log(dayOneUvi);
+
+//uvIndex.text("Uv-Index: " + dayOneUvi);
+if (uvIndex >= 2){
+  uvIndex.addClass("favorable")
+} else if (uvIndex >= 3 && uvIndex <= 7) {
+  uvIndex.hide("favorable");
+  uvIndex.hide("severe");
+  uvIndex.addClass("moderate");
+} else if (uvIndex >=8){
+  //uvIndex.hide("favorable");
+  //uvIndex.hide("moderate");
+  uvIndex.addClass("severe");
+}
+
+
+
+fiveDays.forEach(day => {
+  //console.log(day);
+  console.log(day);
+  day += fiveDays.temp;
+ //console.log(day.temp);
 })
 
 
 
 
+
+
+
+
+
+
+//fiveDay.forEach(day => day += data.list.main.temp)
+//console.log(day);
 }
-//get5DayCityForecast(city);
+
+
 
 
 
