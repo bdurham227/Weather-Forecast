@@ -103,7 +103,7 @@ const getCityWeather = (city) => {
     console.log(data);
     displayCurrentWeather(data, city);
     get5DayCityForecast(data.coord.lat, data.coord.lon);
-    console.log(city);
+    //console.log(city);
    // console.log($('#city').val());
   })
 }
@@ -245,34 +245,48 @@ const display5FiveDay = (data) => {
   //console.log(data.list[0]);
   //displayCurrentWeather(data, city);
   let fiveDays = data.daily.slice(0,5);
-  console.log(data);
-console.log(fiveDays);
+  //console.log(data);
+//console.log(fiveDays);
 //console.log(data);
 //uvIndex.text(data.current.uvi);
-console.log(data.current.uvi);
+/*console.log(data.current.uvi);
 let currentUv = Math.round(data.current.uvi);
-uvIndex.text("Uv-Index: " + currentUv);
+uvIndex.text("Uv-Index: " + currentUv);*/
 
 
 let dayOneT = fiveDays[0].temp;
 let dayOneH = fiveDays[0].humidity;
 let dayOneUvi = fiveDays[0].uvi;
-console.log(dayOneT);
-console.log(dayOneH);
+//console.log(dayOneT);
+//console.log(dayOneH);
 //console.log(dayOneUvi);
 
+
+//===================UV INDEX=========================
+//console.log(data.current.uvi);
+let currentUv = Math.round(data.current.uvi);
+uvIndex.text("Uv-Index: " + currentUv);
+
 //uvIndex.text("Uv-Index: " + dayOneUvi);
-if (uvIndex >= 2){
-  uvIndex.addClass("favorable")
-} else if (uvIndex >= 3 && uvIndex <= 7) {
-  uvIndex.hide("favorable");
-  uvIndex.hide("severe");
-  uvIndex.addClass("moderate");
-} else if (uvIndex >=8){
+if (currentUv <= 2){
+  uvIndex.addClass('favorable')
+} else if (currentUv >= 3 && currentUv <= 7) {
   //uvIndex.hide("favorable");
-  //uvIndex.hide("moderate");
-  uvIndex.addClass("severe");
+  //uvIndex.hide("severe");
+  uvIndex.removeClass('favorable');
+  uvIndex.addClass('moderate');
+} else if (currentUv >=8){
+  uvIndex.removeClass("favorable");
+  uvIndex.removeClass("moderate");
+  uvIndex.addClass('severe');
 }
+
+
+
+
+
+
+
 
 
 
