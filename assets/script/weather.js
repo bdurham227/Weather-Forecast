@@ -197,28 +197,28 @@ fetch(oneUrl)
 const display5FiveDay = (data) => {
   //gets api call weather object for 5 day forecast and slices at first element (0basedindexing) and stops the slice at the 5th element
 let fiveDays = data.daily.slice(0,5);
- 
+//let iconCode = data.weather[0].icon
+/*let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+$('#icon1').attr("src", iconUrl);
+$('#icon2').attr("src", iconUrl);
+$('#icon3').attr("src", iconUrl);
+$('#icon4').attr("src", iconUrl);
+$('#icon5').attr("src", iconUrl);*/
 
 
 
 fiveDays.forEach((day,index) => {
   console.log(day);
-  let iconCode = data.weather[0].icon
-    let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    $('#icon1').attr("src", iconUrl);
-    $('#icon2').attr("src", iconUrl);
-    $('#icon3').attr("src", iconUrl);
-    $('#icon4').attr("src", iconUrl);
-    $('#icon5').attr("src", iconUrl);
+
   
   let dayTemp = Math.round(day.temp.day);
   let dayHumidity = day.humidity;
   //console.log(dayHumidity);
-  $(`#day${index+1}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon1'));
-  $(`#day${index+2}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon2'));
-  $(`#day${index+3}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon3'));
-  $(`#day${index+4}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon4'));
-  $(`#day${index+5}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon5'));
+  $(`#day${index+1}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  $(`#day${index+2}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  $(`#day${index+3}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  $(`#day${index+4}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  $(`#day${index+5}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
   //console.log(dayTemp);
 
 })
