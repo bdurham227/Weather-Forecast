@@ -24,8 +24,12 @@ let humidity = $('#humidity');
 let windSpeed = $('#wind');
 let uvIndex = $('#uv-index');
 let weatherIcon = $('#icon');
-
-//let previousSearch = localStorage.getItem("city");
+let day1 = $('#day1');
+let day2 = $('#day1');
+let day3 = $('#day2');
+let day4 = $('#day3');
+let day5 = $('#day4');
+//let previousSear4h =4localStorage.getItem("city");
 
 /*var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -146,7 +150,7 @@ const displayCurrentWeather = (data, searchCity) => {
  
 
 //=======WEATHER ICON=======
-  let iconCode = data.weather[0].icon
+  let iconCode = data.weather[0].icon;
     let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
     weatherIcon.attr("src", iconUrl);
 let cityTemp = Math.round(data.main.temp);
@@ -191,11 +195,46 @@ fetch(oneUrl)
 }
 //=============================Displaying 5 Forecast====================================
 const display5FiveDay = (data) => {
-  //console.log(data.list[0]);
-  //displayCurrentWeather(data, city);
-  let fiveDays = data.daily.slice(0,5);
-  //console.log(data);
-console.log(fiveDays);
+  //gets api call weather object for 5 day forecast and slices at first element (0basedindexing) and stops the slice at the 5th element
+let fiveDays = data.daily.slice(0,5);
+ 
+
+
+
+fiveDays.forEach((day,index) => {
+  console.log(day);
+  let iconCode = data.weather[0].icon
+    let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    $('#icon1').attr("src", iconUrl);
+    $('#icon2').attr("src", iconUrl);
+    $('#icon3').attr("src", iconUrl);
+    $('#icon4').attr("src", iconUrl);
+    $('#icon5').attr("src", iconUrl);
+  
+  let dayTemp = Math.round(day.temp.day);
+  let dayHumidity = day.humidity;
+  //console.log(dayHumidity);
+  $(`#day${index+1}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon1'));
+  $(`#day${index+2}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon2'));
+  $(`#day${index+3}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon3'));
+  $(`#day${index+4}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon4'));
+  $(`#day${index+5}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%" + `\n` + $('#icon5'));
+  //console.log(dayTemp);
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
 //console.log(data);
 //uvIndex.text(data.current.uvi);
 /*console.log(data.current.uvi);
@@ -204,16 +243,36 @@ uvIndex.text("Uv-Index: " + currentUv);*/
 
 //=================DAY ONE===================
 
-let dayOneTemp = Math.round(fiveDays[0].temp.day);
-let dayOneTempDiv = $('<div>');
-dayOneTempDiv.text(dayOneTemp);
-fiveDayContainer.append("Temperature: " + dayOneTemp + "°F" );
+//let dayOneTemp = Math.round(fiveDays[0].temp.day);
+//let dayOneHumidity = Math.round(fiveDays[0].humidity);
+//tomorrow.text("Temperature: " + dayOneTemp + "°F" + " " + "Humidity: " + dayOneHumidity + "%");
+//let dayOneTempDiv = $('<div>');
+//dayOneTempDiv.text(dayOneTemp);
+//fiveDayContainer.append("Temperature: " + dayOneTemp + "°F" );
 //add humidity
 //console.log(fiveDays[0].humidity);
-let dayOneHumidity = Math.round(fiveDays[0].humidity);
-let dayOneHumidityDiv = $('<div>');
+
+/*let dayOneHumidityDiv = $('<div>');
 dayOneHumidityDiv.text(dayOneHumidity);
 fiveDayContainer.append("Humidity: " + dayOneHumidity + "%");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //======================DAY TWO=================================
@@ -260,7 +319,7 @@ fiveDayContainer.append("Temperature: " + dayFiveTemp + "°F" );
 let dayFiveHumidity = Math.round(fiveDays[4].humidity);
 let dayFiveHumidityDiv = $('<div>');
 dayFiveHumidityDiv.text(dayFiveHumidity);
-fiveDayContainer.append("Humidity: " + dayFiveHumidity + "%");
+fiveDayContainer.append("Humidity: " + dayFiveHumidity + "%");*/
 
 
 
