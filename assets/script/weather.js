@@ -47,6 +47,27 @@ let day5 = $('#day4');
 
 }*/
 
+$('document').ready(function () {
+ 
+  const makeButtons =(city) => {
+    let button1 = $('<button>');
+    button1.text(city);
+    pastSearchEl.append(button1);
+    button1.on("click", function () {
+       let buttonCity = $(this).text()
+       console.log($(this));
+       getCityWeather(buttonCity);
+    })
+  }
+
+  let heyImFromLocalStorage = localStorage.getItem("cities");
+  heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage) || [];
+  for (var i = 0; i < heyImFromLocalStorage.length; i++) { 
+    makeButtons(heyImFromLocalStorage[i]);
+  //makeButtons()
+  }
+
+
 const formSubmitHandler = (event) => {
   event.preventDefault();
   //let city = cityInputEl.value;
@@ -61,13 +82,22 @@ const formSubmitHandler = (event) => {
     alert("please enter a city name");
   }
   //saveSearch();
-  
+  makeButtons(city);
+  let heyImFromLocalStorage = localStorage.getItem("cities") || [];
+    if (heyImFromLocalStorage.length > 0) {
+      heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage);
+    }
+    //heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage);
+    heyImFromLocalStorage.push(city);
+     let stringifiedCities = JSON.stringify(heyImFromLocalStorage);
+     localStorage.setItem("cities", stringifiedCities);
 }
 
 //const buttonClickHandler = (event) => {
  // let previousSearch = event.target;
 //  console.log(previousSearch);
 //}
+
 
 
 
@@ -97,6 +127,7 @@ getCityWeather(city);*/
 
 //=====================function that handles and fetches API CALL then calls displayCurrentWeather function==========================
 const getCityWeather = (city) => {
+  //console.log(city);
   let apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
   //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
@@ -205,20 +236,32 @@ $('#icon3').attr("src", iconUrl);
 $('#icon4').attr("src", iconUrl);
 $('#icon5').attr("src", iconUrl);*/
 
-
+//$('#heading2').text(moment().add(1, 'days').format('l'));
 
 fiveDays.forEach((day,index) => {
   console.log(day);
-
   
+  let heading1 = moment().add(`${index+1}`, 'days').format('l');
   let dayTemp = Math.round(day.temp.day);
   let dayHumidity = day.humidity;
-  //console.log(dayHumidity);
-  $(`#day${index+1}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  $(`#day${index+2}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  $(`#day${index+3}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  $(`#day${index+4}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  $(`#day${index+5}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  let iconCode = day.weather[0].icon
+  //console.log(iconCode)
+  let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+  //console.log(iconUrl)
+  //let icon1 = $('#weatherIcon1');
+  $('#weatherIcon1').attr("src", iconUrl)
+  let imgTag = $("<img>")
+  //$(`#day${index+1}`).prepend(imgTag)
+  imgTag.attr("src", iconUrl) ;
+  
+  $(`#day${index+1}`).html("(" + heading1 + ")" + `\n` + `\n` + "Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%")
+  $(`#day${index+1}`).append(imgTag);
+ 
+  
+  // $(`#day${index+2}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  // $(`#day${index+3}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  // $(`#day${index+4}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
+  // $(`#day${index+5}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
   //console.log(dayTemp);
 
 })
@@ -323,43 +366,6 @@ fiveDayContainer.append("Humidity: " + dayFiveHumidity + "%");*/
 
 
 
-
-
-
-
-
-
-
-//console.log(dayOneTemp);
-
-
-//let dayOneHumidity = fiveDays[0].humidity;
-//let dayOneUvi = fiveDays[0].uvi;
-
-//fiveDays.forEach(day => {
-  //console.log(day);
-  //console.log(day.temp.day);
-  //let forecastedTemperature = Math.round(day.temp.day);
-  //let newDayArray = [];
-  //newDayArray.push(forecastedTemperature);
-  //console.log(newDayArray);
-  //let newDay = $('<div>');
- // newDay.text(forecastedTemperature);
-  //fiveDayContainer.append(newDay)
-  
-  //day += temp;
- //console.log(day.daily.temp);
-//})
-//let forecastedTemperature = Math.round(fiveDays.temp.day);
-//let newDayArray = [];
-//newDayArray.push(forecastedTemperature);
-//console.log(newDayArray);
-
-//console.log(dayOneT);
-//console.log(dayOneH);
-//console.log(dayOneUvi);
-
-
 //===================UV INDEX=========================
 //console.log(data.current.uvi);
 let currentUv = Math.round(data.current.uvi);
@@ -388,6 +394,8 @@ if (currentUv <= 2){
 
 
 cityFormEl.on("submit", formSubmitHandler);
+})
+
 
 //==========================================================TEST  CODE=================================
 
