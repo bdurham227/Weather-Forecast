@@ -28,7 +28,7 @@ Live page view:
 ​
 ​![ScreenShot](assets/images/weatherforecastscreenshot.png "ScreenShot")
 
-The Scheduler will save live inputs even on refresh:
+Gif demonstrating the applications functionality:
 
 ![Weather demo](assets/images/WeatherApp.gif)
 
