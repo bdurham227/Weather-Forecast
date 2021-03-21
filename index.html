@@ -1,152 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    
-        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"/>
-        <link rel="style" href="jass.css">
-        <link rel="stylesheet" href="./assets/css/style.css" />
-        <title>Weather App</title>
-      </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
+    <link rel="style" href="jass.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Weather App</title>
+</head>
+
 <body class="flex-column min-100-vh">
     <!--header-->
     <header class="jumbotron d-flex justify-content-center bg-dark">
         <h1 class="display-3 text-light">Weather Dashboard</h1>
     </header>
-    
-    
 
 
 
-<main class="container-fluid">
+
+<!-------------------------------------------Search Form Element----------------->
+    <main class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-4 p-2 search-column">
+            <div class="col-12 col-md-4 p-2 m-1 search-column">
                 <form id="city-search-form" class="border p-2">
                     <h3 class="card-header text-uppercase p-1 mb-2">Search for a City</h3>
                     <label class="form-label" for="city-name">City: </label>
                     <input id="city" name="search-input" type="text" autofocus='true' class="form-input" />
                     <button type="submit" class="btn btn-info"><i class="fas fa-search"></i></button>
                 </form>
-                <div class="row">
-                <div class="past-search-border" id="past-search-buttons"></div>
-            </div>
-            </div>
-            <!--Current Weather-->
-            <!--<div class="row">
+                <div class="d-flex flex-column w-100 btn-light border" id="past-search-buttons">
 
-                <div id=""
+                </div>
+            </div>
 
-                <div id="temperature">
-                    Temperature:
-                </div>
-               <div id="humidity">
-                    Humidity:
-                </div>
         
+            <!--------------------------Current Temperature Container----------------------->
+            <div class="col-md-7 border border-dark border-5 selected-city" id="current-forecast">
 
-            </div>-->
+                <h2 id="current-city"></h2>
+                <img id="icon" src="">
+                <div id="current-weather-container" class="list-group"></div>
 
-            <div class="row p-2">
-            <div class="col-12 col-md-12">
-                <div class="row border selected-city" id="current-forecast">
-                    <div class="col-12">
-                        <h2 id="current-city"></h2>
-                        <img id="icon" src="">
-                        <div id="current-weather-container" class="list-group"></div>
+                <div class="row d-flex flex-column">
 
-                        <div class="row">
-
-                            <div id="temperature">
-                                <p>Temperature:</p>
-                            </div>
-
-                            <div id="humidity">
-                                Humidity:
-                            </div>
-
-                            <div id="wind">
-                                Wind Speed:
-                            </div>
-
-                            <div id="uv-index">
-                                UV-Index:
-                            </div>
-
-                        </div>
+                    <div class="row m-2 fw-bold">
+                        <h5 id="temperature">Temperature:</h5>
                     </div>
+
+                    <div class="row m-2">
+                        <h5 id="humidity">Humidity:</h5>
+                    </div>
+
+                    <div class="row m-2">
+                        <h5 id="wind">Wind Speed:</h5>
+                    </div>
+
+                    <div class="row m-2">
+                        <h5 id="uv-index">UV-Index: </h5>
+                    </div>
+
                 </div>
             </div>
-        </div>
 
         </div>
-       <!--- <div class="row border" id="five-day-forecast">
-            <h2 class="col-12" id="forecast"></h2>
-            <div class="d-flex" id="fiveday-container">
-                <img id="icon" src="">
-            </div>
-        </div>-->
-        <div class="row">
-            <div class="col-12">
-                <h3>5-Day Forecast</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div id="day1" class="col forecast bg-primary text-white ml-3 mb-3 rounded">
-                <!--<h3 id="heading1"></h3>
-                <img id="weatherIcon1" src="">-->
-            </div>
-            <div id="day2" class="col forecast bg-primary text-white ml-3 mb-3 rounded">
-                <h3 id="heading2"></h3>
-                <img id="weatherIcon2" src="">
-            </div>
-            <div id="day3" class="col forecast bg-primary text-white ml-3 mb-3 rounded">
-                <h3 id="heading3"></h3>
-                <img id="weatherIcon3" src="">
-            </div>
-            <div id="day4" class="col forecast bg-primary text-white ml-3 mb-3 rounded">
-                <h3 id="heading4"></h3>
-                <img id="weatherIcon4" src="">
-            </div>
-            <div id="day5" class="col forecast bg-primary text-white ml-3 mb-3 rounded">
-                <h3 id="heading5"></h3>
-                <img id="weatherIcon5" src="">
-            </div>
         </div>
         
     </main>
-
-    <!--<main class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-9 p-3 search-column">
-                <form class="border p-2" id="city-search-column">
-                    <h4>Search for a City</h4>
-                    <input id="city" type="text" autofocus="true" class="form-input">
-                    <button class='btn btn-primary' type="submit"><i class='fas fa-search'></button>
-                </form>
-                <div class="past-search-border" id="past-search-buttons"></div>
-            </div>
-            <div class="col-12 col-md-9">
-                <div class="row border selected-city" id="current-forecast">
-                    <div class="col-12">
-                        <h2 id="previous-city"></h2>
-                        <div id="current-weather-container" class="list-group"></div>
-                    </div>
-                </div>
-                <div class="row border" id="five-day-forecast">
-                    <h2 class="col-12" id="forecast"></h2>
-                    <div class="d-flex" id="fiveday-container"></div>
-                </div>
-            </div>
+    <!---------FIVE DAY FORECAST CONTAINER--------------->
+    <div class="row col-md-6 m-1">
+        <div class="col-12">
+            <h3>5-Day Forecast</h3>
         </div>
-    </main>-->
-    
-
+    </div>
+    <div class="row col-12 col-md-12 border border-2">
+        <div id="day1" class="row col-2 forecast bg-primary text-white ml-5 mb-3 rounded">
+           
+        </div>
+        <div id="day2" class="row col-2 forecast bg-primary text-white ml-5 mb-3 rounded">
+            
+        </div>
+        <div id="day3" class="row col-2 forecast bg-primary text-white ml-5 mb-3 rounded">
+            
+        </div>
+        <div id="day4" class="row col-2 forecast bg-primary text-white ml-5 mb-3 rounded">
+            
+        </div>
+        <div id="day5" class="row col-2 forecast bg-primary text-white ml-5 mb-3 rounded">
+           
+        </div>
+    </div>
 
 
 
@@ -154,4 +101,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./assets/script/weather.js"></script>
 </body>
+
 </html>

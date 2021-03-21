@@ -1,16 +1,9 @@
 var cities = [];
 
 var cityFormEl = $('#city-search-form');
-//let cityInputEl = $('#city').val();
-//console.log($('#city').val())
 let cityInputEl = $('input[name="search-input"]');
-//let cityInputEl = document.querySelector('#city');
-//console.log(cityInputEl.value);
-let city = cityInputEl.val();
-//let city = cityInputEl.value;
 
-//let submitBtn = $('#button');
-//let cityInputEl = document.getElementById("city");
+let city = cityInputEl.val();
 var pastSearchEl = $('#past-search-buttons');
 var currentCityEl = $('#current-city');
 var currentWeatherContainer = $('current-weather-container');
@@ -19,37 +12,27 @@ var currentCityWeather = $('#current-forecast');
 var forecastEl = $('#forecast');
 var fiveDayContainer = $('#fiveday-container');
 let rightNow = moment().subtract(10, 'days').calendar();
+
 let temperature = $('#temperature');
 let humidity = $('#humidity');
 let windSpeed = $('#wind');
 let uvIndex = $('#uv-index');
 let weatherIcon = $('#icon');
-let day1 = $('#day1');
-let day2 = $('#day1');
-let day3 = $('#day2');
-let day4 = $('#day3');
-let day5 = $('#day4');
-//let previousSear4h =4localStorage.getItem("city");
 
-/*var formSubmitHandler = function (event) {
-  event.preventDefault();
-  var city = cityInputEl.val().trim();
-  if(city) {
-    getCityWeather(city);
-    get5Day(city);
-    cities.unshift({city});
-    cityInputEl.val("");
-  } else {
-    alert("please enter a city");
-  }
-  saveSearch();
-  pastSearch();
 
-}*/
+//let day1 = $('#day1');
+//let day2 = $('#day1');
+//let day3 = $('#day2');
+//et day4 = $('#day3');
+//let day5 = $('#day4');
 
+//document ready function on page load
 $('document').ready(function () {
- 
-  const makeButtons =(city) => {
+
+ // function that makes buttons dynamically and assigns city text and value
+
+  const makeButtons = (city) => {
+
     let button1 = $('<button>');
     button1.text(city);
     pastSearchEl.append(button1);
@@ -59,14 +42,18 @@ $('document').ready(function () {
        getCityWeather(buttonCity);
     })
   }
+ 
+
+//check local storage- if nothing is in local storage make an empty array
 
   let heyImFromLocalStorage = localStorage.getItem("cities");
   heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage) || [];
   for (var i = 0; i < heyImFromLocalStorage.length; i++) { 
     makeButtons(heyImFromLocalStorage[i]);
-  //makeButtons()
+  
   }
 
+  //function that locally creates the let variable and sets its value then runs a conditional. Once the conditional is run it will check local storage and set if something was entered
 
 const formSubmitHandler = (event) => {
   event.preventDefault();
@@ -83,47 +70,15 @@ const formSubmitHandler = (event) => {
   }
   //saveSearch();
   makeButtons(city);
-  let heyImFromLocalStorage = localStorage.getItem("cities") || [];
-    if (heyImFromLocalStorage.length > 0) {
-      heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage);
-    }
-    //heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage);
+  let heyImFromLocalStorage = localStorage.getItem("cities");
+  heyImFromLocalStorage = JSON.parse(heyImFromLocalStorage) || [];
+    
     heyImFromLocalStorage.push(city);
      let stringifiedCities = JSON.stringify(heyImFromLocalStorage);
      localStorage.setItem("cities", stringifiedCities);
 }
 
-//const buttonClickHandler = (event) => {
- // let previousSearch = event.target;
-//  console.log(previousSearch);
-//}
 
-
-
-
-
-const saveSearch = () => {
-  localStorage.setItem("city", JSON.stringify(city));
-}
-
-
-
-/*function getCityWeather (city) {
-  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
-  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-//console.log("function-start");
-
-
-fetch(apiUrl)
-.then(response => response.json())
-.then(data => {
-  
-  console.log(data);
-  console.log(city);
-})
-}
-getCityWeather(city);*/
 
 //=====================function that handles and fetches API CALL then calls displayCurrentWeather function==========================
 const getCityWeather = (city) => {
@@ -138,42 +93,9 @@ const getCityWeather = (city) => {
     console.log(data);
     displayCurrentWeather(data, city);
     get5DayCityForecast(data.coord.lat, data.coord.lon);
-    //console.log(city);
-   // console.log($('#city').val());
+    
   })
 }
-//console.log($('#city').val());
-//getCityWeather(city);
-//console.log($('#city').val());
-
-/*const oneCallAPI = (lat,lon) => {
-  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
-  var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
-  //`api.openweathermap.org/data/2.5/weather?q={city name}&appid=23dd7d8d5c92cd7c1c479c510aaf11d3`
-
-  fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    console.log(data.coord.lat, data.coord.lon);
-    
-    //console.log(displayCurrentWeather);
-  })
-}*/
-
-/*var displayCurrentWeather = function (weather, searchCity) {
-  var apiKey = `13a7d99fd01bbf81add0b89d186f1c5f`;
-  //var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-
-  fetch(apiUrl)
-  method: "POST"
-
-  
-  currentWeatherContainer.text("");
-  currentCityWeather.text(searchCity.main);
-  currentWeatherContainer.append(currentCityWeather);
-}*/
 
 
 //============================Handles getcityWeather API data to display on html========================
@@ -187,12 +109,9 @@ const displayCurrentWeather = (data, searchCity) => {
 let cityTemp = Math.round(data.main.temp);
 //=================================================================
 
-//console.log(data.weather[0].icon);
-//console.log(fahrenheit);
-//let tempInF = Math.floor(data.main.temp * (9/5) + 32);
 
 //======================city name displaying on HTML====================================
-currentCityEl.text(searchCity + " " + rightNow);
+currentCityEl.text(searchCity.toUpperCase(0) + " " + rightNow);
 temperature.text("Temperature " + cityTemp + "°F");
 currentWeatherContainer.append(temperature);
 humidity.text("Humidity: " + data.main.humidity + "%");
@@ -214,8 +133,6 @@ fetch(oneUrl)
 .then(response => response.json())
 .then(data => {
   console.log(data);
-  //console.log(lat, lon);
-  //console.log(data.coord.lat, data.coord.lon)
   display5FiveDay(data);
  
 
@@ -227,16 +144,8 @@ fetch(oneUrl)
 //=============================Displaying 5 Forecast====================================
 const display5FiveDay = (data) => {
   //gets api call weather object for 5 day forecast and slices at first element (0basedindexing) and stops the slice at the 5th element
-let fiveDays = data.daily.slice(0,5);
-//let iconCode = data.weather[0].icon
-/*let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-$('#icon1').attr("src", iconUrl);
-$('#icon2').attr("src", iconUrl);
-$('#icon3').attr("src", iconUrl);
-$('#icon4').attr("src", iconUrl);
-$('#icon5').attr("src", iconUrl);*/
 
-//$('#heading2').text(moment().add(1, 'days').format('l'));
+let fiveDays = data.daily.slice(0,5);
 
 fiveDays.forEach((day,index) => {
   console.log(day);
@@ -245,138 +154,32 @@ fiveDays.forEach((day,index) => {
   let dayTemp = Math.round(day.temp.day);
   let dayHumidity = day.humidity;
   let iconCode = day.weather[0].icon
-  //console.log(iconCode)
+  
   let iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-  //console.log(iconUrl)
-  //let icon1 = $('#weatherIcon1');
+ 
   $('#weatherIcon1').attr("src", iconUrl)
   let imgTag = $("<img>")
-  //$(`#day${index+1}`).prepend(imgTag)
+  
   imgTag.attr("src", iconUrl) ;
   
   $(`#day${index+1}`).html("(" + heading1 + ")" + `\n` + `\n` + "Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%")
   $(`#day${index+1}`).append(imgTag);
  
   
-  // $(`#day${index+2}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  // $(`#day${index+3}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  // $(`#day${index+4}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  // $(`#day${index+5}`).text("Temperature: " + dayTemp + "°F" + `\n` + "Humidity " + dayHumidity + "%");
-  //console.log(dayTemp);
-
 })
 
 
 
-
-
-
-
-
-
-
-
-
-
-//console.log(data);
-//uvIndex.text(data.current.uvi);
-/*console.log(data.current.uvi);
-let currentUv = Math.round(data.current.uvi);
-uvIndex.text("Uv-Index: " + currentUv);*/
-
-//=================DAY ONE===================
-
-//let dayOneTemp = Math.round(fiveDays[0].temp.day);
-//let dayOneHumidity = Math.round(fiveDays[0].humidity);
-//tomorrow.text("Temperature: " + dayOneTemp + "°F" + " " + "Humidity: " + dayOneHumidity + "%");
-//let dayOneTempDiv = $('<div>');
-//dayOneTempDiv.text(dayOneTemp);
-//fiveDayContainer.append("Temperature: " + dayOneTemp + "°F" );
-//add humidity
-//console.log(fiveDays[0].humidity);
-
-/*let dayOneHumidityDiv = $('<div>');
-dayOneHumidityDiv.text(dayOneHumidity);
-fiveDayContainer.append("Humidity: " + dayOneHumidity + "%");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//======================DAY TWO=================================
-let dayTwoTemp = Math.round(fiveDays[1].temp.day);
-let dayTwoTempDiv = $('<div>');
-dayTwoTempDiv.text(dayTwoTemp);
-fiveDayContainer.append("Temperature: " + dayTwoTemp + "°F" );
-//add humidity
-let dayTwoHumidity = Math.round(fiveDays[1].humidity);
-let dayTwoHumidityDiv = $('<div>');
-dayTwoHumidityDiv.text(dayTwoHumidity);
-fiveDayContainer.append("Humidity: " + dayTwoHumidity + "%");
-//============================================
-
-//==================DAY THREE====================
-let dayThreeTemp = Math.round(fiveDays[2].temp.day);
-let dayThreeTempDiv = $('<div>');
-dayThreeTempDiv.text(dayThreeTemp);
-fiveDayContainer.append("Temperature: " + dayThreeTemp + "°F" );
-//add humidity
-let dayThreeHumidity = Math.round(fiveDays[2].humidity);
-let dayThreeHumidityDiv = $('<div>');
-dayThreeHumidityDiv.text(dayThreeHumidity);
-fiveDayContainer.append("Humidity: " + dayThreeHumidity + "%");
-//=====================================
-
-//===================DAY FOUR================
-let dayFourTemp = Math.round(fiveDays[3].temp.day);
-let dayFourTempDiv = $('<div>');
-dayFourTempDiv.text(dayFourTemp);
-fiveDayContainer.append("Temperature: " + dayFourTemp + "°F" );
-//add humidity
-let dayFourHumidity = Math.round(fiveDays[3].humidity);
-let dayFourHumidityDiv = $('<div>');
-dayFourHumidityDiv.text(dayFourHumidity);
-fiveDayContainer.append("Humidity: " + dayFourHumidity + "%");
-
-//======================DAY FIVE=====================
-let dayFiveTemp = Math.round(fiveDays[4].temp.day);
-let dayFiveTempDiv = $('<div>');
-dayFiveTempDiv.text(dayFiveTemp);
-fiveDayContainer.append("Temperature: " + dayFiveTemp + "°F" );
-//add humidity
-let dayFiveHumidity = Math.round(fiveDays[4].humidity);
-let dayFiveHumidityDiv = $('<div>');
-dayFiveHumidityDiv.text(dayFiveHumidity);
-fiveDayContainer.append("Humidity: " + dayFiveHumidity + "%");*/
-
-
-
 //===================UV INDEX=========================
-//console.log(data.current.uvi);
+
 let currentUv = Math.round(data.current.uvi);
 uvIndex.text("Uv-Index: " + currentUv);
 
-//uvIndex.text("Uv-Index: " + dayOneUvi);
+
 if (currentUv <= 2){
   uvIndex.addClass('favorable')
 } else if (currentUv >= 3 && currentUv <= 7) {
-  //uvIndex.hide("favorable");
-  //uvIndex.hide("severe");
+  
   uvIndex.removeClass('favorable');
   uvIndex.addClass('moderate');
 } else if (currentUv >=8){
@@ -385,48 +188,9 @@ if (currentUv <= 2){
   uvIndex.addClass('severe');
 }
 
-
-
 }
 
 
-
-
-
 cityFormEl.on("submit", formSubmitHandler);
+
 })
-
-
-//==========================================================TEST  CODE=================================
-
-//let cityInfo = $('<div>');
-//let weatherIcon = $('<div>');
-//weatherIcon.text(data.weather[0].icon);
-//cityInfo.append(weatherIcon);
-
-//cityInfo.text("Temperature " + cityTemp);
-//currentCityWeather.append(cityInfo);
-
-
-
-//for (var i = 0; i < 4;i++) {
-//let cityInfo = $('<ul>');
-//let cityInfoLi1 = $('<li>');
-//let cityInfoLi2 = $('<li>')
-//cityInfoLi1.text("Temperature " + cityTemp);
-//cityInfo.append(cityInfoLi1);
-//}
-
-//================================================TEST CODE================================================
-//currentCityWeather.append(cityInfo);
-/*for (var i = 0; i < data.length; i++) {
-  //currentCityWeather.text(searchCity)
-  let cityTitle = $('<h3>');
-  cityTitle.text(data[i].main.temp);
-  //console.log(data.main);
-  //console.log(cityTitle);
-  currentCityWeather.append(cityTitle);
-  body.append(currentCityWeather);
-}*/
-
-//===============================================END OF TEST CODE====================================
