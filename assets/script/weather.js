@@ -203,21 +203,13 @@ pastSearchEl.append(clearHistoryButton);
 const removeItem = (event) => {
   localStorage.clear();
   $(event.target).siblings().remove();
+  location.reload();
   //console.log(event.children());
 }
-
-
-
-
-
 
 
 clearHistoryButton.on("click", removeItem);
 
 cityFormEl.on("submit", formSubmitHandler);
-
-
-
-
 
 })

@@ -13,7 +13,7 @@ Weather Forecast Dashboard
 <a name="desc"></a>
 ## 1. Description
 ​
-Life can be busy! So here's a solution. Plan your day-to-day schedule to keep on top of a busy work schedule with the Work Day Scheduler application. Here you can input and update your current day-to-day needs without worrying if you have a pen in your or a pen in your pocket. Simply type into your schedule and organize your day-to-day, hour-by-hour schedule. The application will change colors to let you know if you a meeting has passed, what you currently have going on and what's left in your daily schedule.
+The acceptance criteria was to create a weather dashboard application that displayed the current weather of a city that a user searches for. My weather dashboard displays the city name, the current date of search, temperature, humidity, wind speed and the uv-index. Below you will find the five day forecast so you can address appropriately.
 ​
 <a name="nav"></a>
 ## 2. Navigation
@@ -30,7 +30,7 @@ Live page view:
 
 The Scheduler will save live inputs even on refresh:
 
-![Planyourday demo](assets\images\weathergif.gif)
+![Weather demo](assets/images/WeatherApp.gif)
 
 
 
