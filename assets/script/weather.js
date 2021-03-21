@@ -44,6 +44,8 @@ $('document').ready(function () {
   }
  
 
+
+
 //check local storage- if nothing is in local storage make an empty array
 
   let heyImFromLocalStorage = localStorage.getItem("cities");
@@ -191,6 +193,31 @@ if (currentUv <= 2){
 }
 
 
+let clearHistoryButton = $('<button>');
+clearHistoryButton.text("Clear History");
+pastSearchEl.append(clearHistoryButton);
+
+
+
+
+const removeItem = (event) => {
+  localStorage.clear();
+  $(event.target).siblings().remove();
+  //console.log(event.children());
+}
+
+
+
+
+
+
+
+clearHistoryButton.on("click", removeItem);
+
 cityFormEl.on("submit", formSubmitHandler);
+
+
+
+
 
 })
